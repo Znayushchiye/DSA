@@ -21,7 +21,7 @@ int main()
 
         int option, count;
         cin >> option;
-        
+
         cout << "\n\n";
         switch (option)
         {
