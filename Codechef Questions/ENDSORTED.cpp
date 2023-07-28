@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
 int main()
@@ -10,46 +11,24 @@ int main()
     {
         int n;
         cin >> n;
-        int permutation[n];
+        vector<int> permutation(n);
         for (int i = 0; i < n; i++)
         {
             cin >> permutation[i];
         }
 
-        int count = 0;
-        if (permutation[0] == 1)
+        int posOf1 = find(permutation.begin(), permutation.end(), 1) - permutation.begin();
+        int posOfN = find(permutation.begin(), permutation.end(), n) - permutation.begin();
+
+        cout << posOf1 << " " << posOfN << endl;
+        // continue;
+
+        int count = n - (posOfN + 1) + posOf1 - (posOf1 > posOfN);
+        if (posOf1 < posOfN)
         {
-            if (permutation[n - 1] == n)
-            {
-                int firstIndex = distance(permutation, find(permutation, permutation + n, 1));
-                count = firstIndex;
-            }
-            else
-            {
-                int lastIndex = distance(permutation, find(permutation, permutation + n, n - 1));
-                count = n - lastIndex;
-            }
+            count = count - (posOf1 == 1 && posOfN == 0);
         }
-        else
-        {
-            if (permutation[n - 1] == n)
-            {
-                int firstIndex = distance(permutation, find(permutation, permutation + n, 1));
-                count = firstIndex;
-            }
-            else
-            {
-                int firstIndex = distance(permutation, find(permutation, permutation + n, 1));
-                int lastIndex = distance(permutation, find(permutation, permutation + n, n - 1));
-                count = n + firstIndex - lastIndex - (firstIndex > lastIndex ? 1 : 0);
-                if (firstIndex == 1 && lastIndex == 0)
-                {
-                    count--;
-                }
-            }
-        }
-        cout << count << endl
-             << endl;
+        cout << count << endl;
     }
     return 0;
 }
