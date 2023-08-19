@@ -24,7 +24,7 @@ bool release(vector<int> &check, int n, int i)
     {
         return true;
     }
-    if (i == 0 && checkInc(check))
+    if (i < 0 && checkInc(check))
     {
         return false;
     }
@@ -44,6 +44,13 @@ int32_t main()
     cin >> n;
     vector<int> check;
     int i = 20;
-    cout << (release(check, n, i) ? "Yes" : "No") << endl;
+    if (n < 0)
+    {
+        cout << "No" << endl;
+    }
+    else
+    {
+        cout << (release(check, n, i) ? "Yes" : "No") << endl;
+    }
     return 0;
 }
