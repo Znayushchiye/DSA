@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Node.cpp"
 using namespace std;
 class LinkedList
@@ -12,33 +11,46 @@ public:
     }
     void insertion(long key)
     {
+        Node *newnode = new Node(key);
+        if (head == NULL)
+        {
+            head = newnode;
+            return;
+        }
+
         Node *temp = head;
-        while (temp != NULL)
+        while (temp->nextNode != NULL)
         {
             temp = temp->nextNode;
         }
-        Node newNode(key);
-
-        temp->nextNode = &newNode;
+        temp->nextNode = newnode;
     }
     void print()
     {
+        if (head == NULL)
+        {
+            cout << "List Empty" << endl;
+            return;
+        }
+
         Node *temp = head;
         while (temp != NULL)
         {
-            cout << temp->val << endl;
-            temp = temp->nextNode;
+            cout << head->val << endl;
+            head = head->nextNode;
         }
     }
 };
 int main()
 {
     LinkedList ll;
+    cout << "Enter n : ";
     int n;
     cin >> n;
-    while (n--)
+    while (n != 0)
     {
         ll.insertion(n);
+        n--;
     }
     ll.print();
     return 0;
